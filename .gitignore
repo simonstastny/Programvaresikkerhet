@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+
+assignment_2\LUT-Improved\build\**
+
