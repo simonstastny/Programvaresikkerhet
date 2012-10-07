@@ -9,6 +9,11 @@
         INSERT INTO user_reviews VALUES ('${fn:escapeXml(param.school_id)}', '${fn:escapeXml(param.name)}', '${fn:escapeXml(param.review)}');
     </sql:update>
 </sql:transaction>
+        
+<sql:query var="schools" dataSource="jdbc/lut2">
+    SELECT * FROM school
+    WHERE school.school_id= ? <sql:param value="${param.school_id}"/>
+</sql:query>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,9 +25,18 @@
         <title>Review added!</title>
     </head>
     <body>
-        <h1>Thanks ${param.name}!</h1>
-        Your contribution is appreciated.<br>
-        You will be redirected to the LUT2.0 main page in a few seconds.
-    </tr>
+      
+      <c:set var="school" value="${schools.rows[0]}"/>
+        <c:choose>
+            <c:when test="${ empty school }">
+                School with id  ${param.school_id} does not exist.
+                <br><br>
+            </c:when>
+            <c:otherwise>
+                <h1>Thanks ${param.name}!</h1>
+                Your contribution is appreciated.<br>
+                You will be redirected to the LUT2.0 main page in a few seconds.
+            </c:otherwise>
+        </c:choose>
 </body>
 </html>
