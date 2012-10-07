@@ -6,6 +6,11 @@
     WHERE user_reviews.school_id = school.school_id
     AND school.school_id = ? <sql:param value="${param.school_id}"/>
 </sql:query>
+    
+<sql:query var="schools" dataSource="jdbc/lut2">
+    SELECT * FROM school
+    WHERE school.school_id= ? <sql:param value="${param.school_id}"/>
+</sql:query>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,6 +21,13 @@
         <title>Reviews for ${param.school_fullname}</title>
     </head>
     <body>
+      <c:set var="school" value="${schools.rows[0]}"/>
+        <c:choose>
+            <c:when test="${ empty school }">
+                School with id  ${param.school_id} does not exist.
+                <br><br>
+            </c:when>
+            <c:otherwise>
         <h1>Reviews for ${param.school_shortname}</h1>
 
         <!-- looping through all available reviews - if there are any -->
@@ -57,6 +69,7 @@
                 </tr>
             </tbody>
         </table>
-
+        </c:otherwise>
+        </c:choose>
     </body>
 </html>
