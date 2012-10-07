@@ -6,7 +6,10 @@
 
 <sql:transaction dataSource="jdbc/lut2">
     <sql:update var="count">
-        INSERT INTO user_reviews VALUES ('${fn:escapeXml(param.school_id)}', '${fn:escapeXml(param.name)}', '${fn:escapeXml(param.review)}');
+        INSERT INTO user_reviews VALUES (?, ?, ?);
+        <sql:param value="${fn:escapeXml(param.school_id)}" />
+        <sql:param value="${fn:escapeXml(param.name)}" />
+        <sql:param value="${fn:escapeXml(param.review)}" />
     </sql:update>
 </sql:transaction>
         
