@@ -5,5 +5,4 @@
 *.war
 *.ear
 
-assignment_2/LUT-Improved/build/
-
+/assignment_2/LUT-Improved/build
