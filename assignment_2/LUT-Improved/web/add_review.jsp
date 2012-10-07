@@ -2,6 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<%@page errorPage="ErrorPage.jsp" %>
+
 <sql:transaction dataSource="jdbc/lut2">
     <sql:update var="count">
         INSERT INTO user_reviews VALUES ('${fn:escapeXml(param.school_id)}', '${fn:escapeXml(param.name)}', '${fn:escapeXml(param.review)}');
