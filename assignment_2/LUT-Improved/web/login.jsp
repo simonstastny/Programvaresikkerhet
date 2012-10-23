@@ -20,7 +20,7 @@
     <c:set var="adminDetails" value="${admin.rows[0]}"/>
     
     <c:choose>
-        <c:when test="${userDetails.password != param.password}">
+        <c:when test="${userDetails.password != BCrypt.hashpw(param.password, BCrypt.gensalt(13))}">
             Login Failed
         </c:when>
         <c:otherwise>
