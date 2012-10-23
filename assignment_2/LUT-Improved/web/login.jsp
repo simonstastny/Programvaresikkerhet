@@ -1,4 +1,4 @@
-
+<%@page import="swsec.sec.BCrypt" %>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -19,9 +19,13 @@
     <c:set var="userDetails" value="${users.rows[0]}"/>
     <c:set var="adminDetails" value="${admin.rows[0]}"/>
     
+    <c:set var="userDetailsPwd" value="${users.rows[0].password}" scope="request" />
+    
+    <% String s = (String) request.getAttribute("userDetailsPwd"); %>
+    
     <c:choose>
-        <c:when test="${userDetails.password != BCrypt.hashpw(param.password, BCrypt.gensalt(13))}">
-            Login Failed
+      <c:when test="<%=!BCrypt.checkpw(request.getParameter("password"),s) %>">
+        Login Failed
         </c:when>
         <c:otherwise>
             <c:set scope="session" var="username" value="false"/>
@@ -50,6 +54,9 @@
     </head>
     <body>
         <h1> Login page </h1>
+        
+        ${BCrypt.hashpw("toto", BCrypt.gensalt(13))}
+        
         <form method="post" action="login.jsp">
             <p>Username:</font><input type="text" name="username" size="20"></p>
             <p>Password:</font><input type="password" name="password" size="20"></p>
