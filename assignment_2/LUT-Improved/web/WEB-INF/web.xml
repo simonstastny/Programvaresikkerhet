@@ -8,11 +8,27 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    <resource-ref>
-        <description>DB for LUT 2.0</description>
-        <res-ref-name>jdbc/lut2</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-        <res-sharing-scope>Shareable</res-sharing-scope>
-    </resource-ref>
+	<servlet>
+		<servlet-name>ServletFormCountry</servlet-name> 
+		<servlet-class>servlets.ServletFormCountry</servlet-class> 
+	</servlet> 
+	<servlet-mapping> 
+		<servlet-name>ServletFormCountry</servlet-name> 
+		<url-pattern>/form_country</url-pattern> 
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ServletFormSchool</servlet-name> 
+		<servlet-class>servlets.ServletFormSchool</servlet-class> 
+	</servlet> 
+	<servlet-mapping> 
+		<servlet-name>ServletFormSchool</servlet-name> 
+		<url-pattern>/formAddCountrySchool</url-pattern> 
+	</servlet-mapping>
+	<resource-ref> 
+		<description>DB for LUT 2.0</description> 
+		<res-ref-name>jdbc/lut2</res-ref-name> 
+		<res-type>javax.sql.DataSource</res-type> 
+		<res-auth>Container</res-auth> 
+		<res-sharing-scope>Shareable</res-sharing-scope> 
+	</resource-ref>
 </web-app>
