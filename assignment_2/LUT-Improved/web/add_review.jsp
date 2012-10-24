@@ -24,7 +24,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="refresh" content="5;url=index.jsp"> 
-        <link rel="stylesheet" type="text/css" href="lutstyle.css">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/inc/lutstyle.css"/>" />
         <title>Review added!</title>
     </head>
     <body>

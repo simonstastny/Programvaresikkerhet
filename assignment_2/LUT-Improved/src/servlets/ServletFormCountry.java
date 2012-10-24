@@ -13,8 +13,8 @@ import forms.FormCountry;
 public class ServletFormCountry extends HttpServlet {
 	public static final String ATT_COUNTRY = "country";
     public static final String ATT_FORM = "form";
-    public static final String VIEW_SUCCESS = "/WEB-INF/add_country.jsp";
-    public static final String VIEW_FORM = "/WEB-INF/formAddCountrySchool.jsp";
+    public static final String VIEW_SUCCESS = "/Restricted/add_country.jsp";
+    public static final String VIEW_FORM = "/Restricted/formAddCountrySchool.jsp";
 		
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         this.getServletContext().getRequestDispatcher( VIEW_FORM ).forward( request, response );

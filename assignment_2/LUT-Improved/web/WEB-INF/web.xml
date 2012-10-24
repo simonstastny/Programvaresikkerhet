@@ -2,28 +2,58 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <session-config>
         <session-timeout>
-            30
+            1
         </session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
+    <filter>
+        <filter-name>Restricted</filter-name>
+        <filter-class>filters.Restricted</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Restricted</filter-name>
+        <url-pattern>/Restricted/*</url-pattern>
+    </filter-mapping>
+    
+    <servlet>
+		<servlet-name>ServletLogin</servlet-name>
+		<servlet-class>servlets.ServletLogin</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>ServletLogin</servlet-name>
+		<url-pattern>/check_login</url-pattern>
+	</servlet-mapping>
+	
+    <servlet>
+		<servlet-name>ServletFormAddCountrySchool</servlet-name> 
+		<servlet-class>servlets.ServletFormAddCountrySchool</servlet-class> 
+	</servlet> 
+	<servlet-mapping> 
+		<servlet-name>ServletFormAddCountrySchool</servlet-name> 
+		<url-pattern>/Restricted/formAddCountrySchool</url-pattern> 
+	</servlet-mapping>
+	    
 	<servlet>
 		<servlet-name>ServletFormCountry</servlet-name> 
 		<servlet-class>servlets.ServletFormCountry</servlet-class> 
 	</servlet> 
 	<servlet-mapping> 
 		<servlet-name>ServletFormCountry</servlet-name> 
-		<url-pattern>/form_country</url-pattern> 
+		<url-pattern>/Restricted/form_country</url-pattern> 
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>ServletFormSchool</servlet-name> 
 		<servlet-class>servlets.ServletFormSchool</servlet-class> 
 	</servlet> 
 	<servlet-mapping> 
 		<servlet-name>ServletFormSchool</servlet-name> 
-		<url-pattern>/formAddCountrySchool</url-pattern> 
+		<url-pattern>/Restricted/form_school</url-pattern> 
 	</servlet-mapping>
+	
 	<resource-ref> 
 		<description>DB for LUT 2.0</description> 
 		<res-ref-name>jdbc/lut2</res-ref-name> 

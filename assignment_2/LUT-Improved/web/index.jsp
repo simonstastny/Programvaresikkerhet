@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="lutstyle.css">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/inc/lutstyle.css"/>" />
         <title>LUT 2.0 - Help Students Conquer the World</title>
     </head>
     <body>
@@ -41,6 +41,6 @@
                 </tr>
             </tbody>
         </table>
-
+		<p>Access <a href="login.jsp">HERE</A> to the admin page.</p>
     </body>
 </html>

@@ -11,7 +11,7 @@ import beans.Country;
 import forms.FormCountry;
 
 public class ServletFormAddCountrySchool extends HttpServlet {
-    public static final String VIEW = "/WEB-INF/formAddCountrySchool.jsp";
+    public static final String VIEW = "/Restricted/formAddCountrySchool.jsp";
 		
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
