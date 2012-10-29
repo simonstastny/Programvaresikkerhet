@@ -2,7 +2,7 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <session-config>
         <session-timeout>
-            1
+            30
         </session-timeout>
     </session-config>
     <welcome-file-list>
@@ -10,12 +10,21 @@
     </welcome-file-list>
     
     <filter>
-        <filter-name>Restricted</filter-name>
-        <filter-class>filters.Restricted</filter-class>
+        <filter-name>User</filter-name>
+        <filter-class>filters.User</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>Restricted</filter-name>
+        <filter-name>User</filter-name>
         <url-pattern>/Restricted/*</url-pattern>
+    </filter-mapping>
+
+     <filter>
+        <filter-name>Admin</filter-name>
+        <filter-class>filters.Admin</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Admin</filter-name>
+        <url-pattern>/Restricted/Admin/*</url-pattern>
     </filter-mapping>
     
     <servlet>
@@ -27,13 +36,50 @@
 		<url-pattern>/check_login</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>ServletAuth</servlet-name>
+		<servlet-class>servlets.ServletAuth</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>ServletAuth</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>ServletLogout</servlet-name>
+	<servlet-class>servlets.ServletLogout</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>ServletLogout</servlet-name>
+	<url-pattern>/logout</url-pattern>
+</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ServletLoginPage</servlet-name>
+		<servlet-class>servlets.ServletLoginPage</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>ServletLoginPage</servlet-name>
+		<url-pattern>/Restricted/user_page</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ServletFormSignup</servlet-name>
+		<servlet-class>servlets.ServletFormSignup</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>ServletFormSignup</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+	
     <servlet>
 		<servlet-name>ServletFormAddCountrySchool</servlet-name> 
 		<servlet-class>servlets.ServletFormAddCountrySchool</servlet-class> 
 	</servlet> 
 	<servlet-mapping> 
 		<servlet-name>ServletFormAddCountrySchool</servlet-name> 
-		<url-pattern>/Restricted/formAddCountrySchool</url-pattern> 
+		<url-pattern>/Restricted/Admin/formAddCountrySchool</url-pattern> 
 	</servlet-mapping>
 	    
 	<servlet>
@@ -42,7 +88,7 @@
 	</servlet> 
 	<servlet-mapping> 
 		<servlet-name>ServletFormCountry</servlet-name> 
-		<url-pattern>/Restricted/form_country</url-pattern> 
+		<url-pattern>/Restricted/Admin/form_country</url-pattern> 
 	</servlet-mapping>
 	
 	<servlet>
@@ -51,7 +97,7 @@
 	</servlet> 
 	<servlet-mapping> 
 		<servlet-name>ServletFormSchool</servlet-name> 
-		<url-pattern>/Restricted/form_school</url-pattern> 
+		<url-pattern>/Restricted/Admin/form_school</url-pattern> 
 	</servlet-mapping>
 	
 	<resource-ref> 

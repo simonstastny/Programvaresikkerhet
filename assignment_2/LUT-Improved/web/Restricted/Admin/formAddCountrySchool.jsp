@@ -19,7 +19,7 @@
 <link type="text/css" rel="stylesheet" href="<c:url value="/inc/lutstyle.css"/>" />
 </head>
 <body>
-	<h1>Welcome to the admin homepage. <br />Here you can add a country.</h1>
+	<h1>Welcome to the admin homepage. <br />Here you can add a new country or a new school in the database.</h1>
 	
 	<table border="0">
 		<thead>
@@ -31,9 +31,9 @@
         <tbody>
         <tr>
         <td>            
-                   <form method="post" action="<c:url value="/Restricted/form_country"/>">
+                   <form method="post" action="<c:url value="/Restricted/Admin/form_country"/>">
 
-                            <p>Full name: <input type="text" id="full_name" name="full_name" value="<c:out value="${country.fullName}"/>" size="20" maxlength="20" ></p>
+                            <p>Full name: <input type="text" id="full_name" name="full_name" value="<c:out value="${country.fullName}"/>" size="20" maxlength="50" ></p>
                             <span class="error">${form.errors['full_name']}</span>
 							<br />
                             
@@ -52,14 +52,14 @@
 		<table border="0">
 		<thead>
 			<tr>
-			<th>Adding of new data in the database.</th>
+			<th>Adding of new school in the database.</th>
 			</tr>
 		</thead>
                     
         <tbody>
 			<tr>
         <td>            
-                   <form method="post" action="<c:url value="/Restricted/form_school"/>">
+                   <form method="post" action="<c:url value="/Restricted/Admin/form_school"/>">
 
                             <p>Full name: <input type="text" id="full_name_school" name="full_name_school" value="<c:out value="${school.fullName}"/>" size="20" maxlength="100" ></p>
                             <span class="error">${form.errors['full_name_school']}</span>

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : ErrorPage
-    Created on : 07-Oct-2012, 16:32:59
-    Author     : Simon
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

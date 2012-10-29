@@ -51,13 +51,13 @@ public class FormCountry {
     }
     
     private void validationShortName( String shortName ) throws Exception {
-        if ( shortName == null || shortName.length() > 3 || (shortName != null && !shortName.matches("^[A-Z]{3}$")) ) {
+        if ( shortName == null || shortName.length() > 3 || (shortName != null && !shortName.matches("^[A-Z]{1,3}$")) ) {
             throw new Exception( "A short name country must be composed of 3 letters maximum." );
         }
     }
     
     private void validationFullName( String fullName ) throws Exception {
-        if ( fullName == null || (fullName != null && !fullName.matches("^[A-Za-z-'\t\n\r\f]{1,20}$")) ) {
+        if ( fullName == null || (fullName != null && !fullName.matches("^[A-Za-z-' ]{1,50}$")) ) {
             throw new Exception( "Only basic letters without accents in a full name country." );
         }
     }

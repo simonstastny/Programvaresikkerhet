@@ -9,7 +9,7 @@
 <sql:query var="verif" dataSource="jdbc/lut2">
     SELECT * FROM country
     WHERE  short_name = ?  
-    AND full_name = ?
+    OR full_name = ?
         <sql:param value="${(param.short_name)}" />
         <sql:param value="${(param.full_name)}" />
 </sql:query>
@@ -32,9 +32,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta http-equiv="refresh" content="5;url=/LUT_2.0_IMPROVED/index.jsp"> 
+<meta http-equiv="refresh" content="5;url=/LUT_2.0_IMPROVED/Restricted/user_page"> 
 <title>Adding of a new country</title>
-<link type="text/css" rel="stylesheet" href="lutstyle.css" />
+<link type="text/css" rel="stylesheet" href="<c:url value="/inc/lutstyle.css"/>" />
 </head>
 <body>
 	<table border="0">
@@ -45,10 +45,18 @@
 		</thead>      
        		 <tbody>
         		<tr>
-        		<td>     
-             	Your country ${param.full_name} (${param.short_name}) has been added in the database. <br />
-				Thank you for your contribution. <br />
-				You will be redirected to the LUT2.0 main page in a few seconds. <br /> 
+        		<td>  
+        		<c:choose>
+					<c:when test="${ empty test_verif }">   
+             			Your country ${param.full_name} (${param.short_name}) has been added in the database. <br />
+						Thank you for your contribution. <br />
+						You will be redirected in a few seconds. <br /> 
+					</c:when>
+					<c:otherwise>
+						Your country ${param.full_name} (${param.short_name}) was already in the database. <br />
+						You will be redirected in a few seconds. <br /> 
+					</c:otherwise>
+				</c:choose>
        			</td>
 				</tr>
 			</tbody>

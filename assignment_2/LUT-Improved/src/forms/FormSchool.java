@@ -85,7 +85,7 @@ public class FormSchool {
     }
     
     private void validationFullName( String fullName ) throws Exception {
-        if ( fullName == null || (fullName != null && !fullName.matches("^[A-Za-z-'\t\n\r\f]{1,20}$")) ) {
+        if ( fullName == null || (fullName != null && !fullName.matches("^[A-Za-z-' ]{1,100}$")) ) {
             throw new Exception( "Only basic letters without accents in a full name school." );
         }
     }

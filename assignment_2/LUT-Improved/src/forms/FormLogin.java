@@ -1,6 +1,7 @@
 package forms;
 
 import java.util.HashMap;
+import sec.BCrypt;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,8 @@ public class FormLogin {
     public User connectUser( HttpServletRequest request ) {
         String username = getFieldValue( request, FIELD_USERNAME );
         String password = getFieldValue( request, FIELD_PASSWORD );
-
+        String passwordHashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        		
         User user = new User();
 
         try {
@@ -38,8 +40,8 @@ public class FormLogin {
             validationPassword( password );
         } catch ( Exception e ) {
             setError( FIELD_PASSWORD, e.getMessage() );
-        }
-        user.setPassword(password);
+        }   
+        user.setPassword(passwordHashed);
         
         if ( errors.isEmpty() ) {
         	setResult("Login successfull !");
@@ -51,11 +53,15 @@ public class FormLogin {
     }
     
     private void validationUsername( String username ) throws Exception {
-        //
+    	if ( username == null || (username != null && !username.matches("^[A-Za-z0-9_-]{1,26}$")) ) {
+            throw new Exception( "Allowed characters : [A-Z] and [a-z] and [0-9] and '_' and '-'" );
+        }
     }
     
     private void validationPassword( String password ) throws Exception {
-        //
+    	if ( password == null || (password != null && !password.matches("^[A-Za-z0-9]{1,26}$")) ) {
+            throw new Exception( "Allowed characters : [A-Z] and [a-z] and [0-9]" );
+        }
     }
     
     private void setError( String champ, String message ) {

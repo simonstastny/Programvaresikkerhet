@@ -1,5 +1,6 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="sec.BCrypt" %> 
 
 <c:choose>
 <c:when test="${param.login!=null}">
@@ -16,6 +17,10 @@
     <c:set var="userDetails" value="${users.rows[0]}"/>
     <c:set var="adminDetails" value="${admin.rows[0]}"/>
     
+	<c:set var="userDetailsPwd" value="${users.rows[0].password}" scope="request" />
+	<% String s = (String) request.getAttribute("userDetailsPwd"); %>
+    
+    
 <html>
 	<head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,30 +29,30 @@
     </head>
 
 <body>
-        
+
         <c:choose>
-        <c:when test="${userDetails.password != param.password}">
+        
+        <c:when test="<%=!BCrypt.checkpw(request.getParameter("password"),s) %>">
             Login Failed
+            <p><a title="lien" href="/LUT_2.0_IMPROVED/index.jsp">Continue</A>.</p>
         </c:when>
         <c:otherwise>
+        <c:set var="login" scope="session" value="${param.username} }"/>
             <c:choose>
             <c:when test="${empty adminDetails}">
-                Login as normal user.
+            	<c:set var="sessionUser" scope="session" value="user"/>
+                <p>Login as normal user.</p>
             </c:when>
             <c:otherwise>
-                <c:set scope="session" var="admin" value="true"/>
-                <p>Login as admin.</p>
-                
-                <p><a title="lien" href="Restricted/formAddCountrySchool">Add a new country or a new school.</A></p>
-                
-                <p>Or maybe you wan't to <a title="lien" href="logout.jsp">log out</A>.</p>
+                <c:set var="sessionAdmin" scope="session" value="admin"/>
+                <p>Login as an admin.</p>
             </c:otherwise>
             </c:choose>
+        <p><a title="lien" href="Restricted/user_page">Continue</A>.</p>
         </c:otherwise>
     </c:choose>
 </c:when>
 </c:choose>
-        
     </body>
 </html>
     

@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Restricted implements Filter {
+public class Admin implements Filter {
     public static final String PUBLIC_ACCESS     = "/index.jsp";
-    public static final String ATT_SESSION_USER = "admin";
 
     public void init( FilterConfig config ) throws ServletException {
     }
@@ -26,10 +25,10 @@ public class Restricted implements Filter {
 
         HttpSession session = request.getSession();
 
-        if ( session.getAttribute( ATT_SESSION_USER ) == null ) {
-            response.sendRedirect( request.getContextPath() + PUBLIC_ACCESS );
+        if ( session.getAttribute( "sessionAdmin" ) != null ) {
+    		chain.doFilter( request, response );
         } else {
-            chain.doFilter( request, response );
+        	response.sendRedirect( request.getContextPath() + PUBLIC_ACCESS );
         }
     }
 
